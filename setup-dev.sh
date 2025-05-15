@@ -15,7 +15,7 @@ echo "🐚 Instalando e configurando Zsh + Oh My Zsh..."
 export RUNZSH=no
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Em vez de chsh (que falha no WSL), garante que o terminal inicie com zsh
+# Ativa Zsh no WSL sem usar chsh (evita erro PAM)
 echo '[ -t 1 ] && exec zsh' >> ~/.bashrc
 
 echo "🎨 Instalando tema Powerlevel10k..."
@@ -43,8 +43,8 @@ echo "⬇️ Instalando Node.js LTS..."
 nvm install --lts
 nvm use --lts
 
-echo "⚛️ Instalando ferramentas JS/React/NestJS..."
-npm install -g create-react-app vite eslint prettier typescript @nestjs/cli
+echo "⚛️ Instalando ferramentas JS modernas (Vite, NestJS)..."
+npm install -g vite eslint prettier typescript @nestjs/cli
 
 echo "🧪 Instalando utilitários extras..."
 sudo apt install -y fzf bat htop jq tree ripgrep
@@ -99,4 +99,4 @@ echo "👉 Recomendo extensões: ESLint, Prettier, Docker, Python, NestJS Snippe
 echo "✅ Instalação finalizada com sucesso!"
 echo "👉 Rode 'exec zsh' ou reinicie o terminal"
 echo "👉 Configure o visual com: p10k configure"
-echo "👉 Comece um projeto com: nest new meuapp ou npx create-react-app meuapp"
+echo "👉 Comece um projeto com: npm create vite@latest ou nest new meuapp"
