@@ -12,7 +12,7 @@ echo "🐍 Instalando Python com pip e venv..."
 sudo apt install -y python3 python3-pip python3-venv python3-dev
 
 echo "🐚 Instalando e configurando Zsh + Oh My Zsh..."
-chsh -s $(which zsh)
+echo '[ -t 1 ] && exec zsh' >> ~/.bashrc $(which zsh)
 export RUNZSH=no
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
