@@ -12,9 +12,11 @@ echo "🐍 Instalando Python com pip e venv..."
 sudo apt install -y python3 python3-pip python3-venv python3-dev
 
 echo "🐚 Instalando e configurando Zsh + Oh My Zsh..."
-echo '[ -t 1 ] && exec zsh' >> ~/.bashrc $(which zsh)
 export RUNZSH=no
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Em vez de chsh (que falha no WSL), garante que o terminal inicie com zsh
+echo '[ -t 1 ] && exec zsh' >> ~/.bashrc
 
 echo "🎨 Instalando tema Powerlevel10k..."
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
@@ -50,10 +52,13 @@ sudo apt install -y fzf bat htop jq tree ripgrep
 echo "🐳 Instalando Docker Engine e Docker Compose..."
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo usermod -aG docker $USER
 
 echo "🔐 Gerando chave SSH se ainda não existir..."
@@ -63,21 +68,17 @@ fi
 
 echo "📝 Configurando o Git..."
 
-# Solicita nome e e-mail do usuário
-read -p "Digite seu nome completo para o Git: " git_name
-read -p "Digite seu e-mail para o Git (o mesmo do GitHub): " git_email
+echo -n "Digite seu nome completo para o Git: "
+read git_name
+
+echo -n "Digite seu e-mail para o Git (o mesmo do GitHub): "
+read git_email
 
 git config --global user.name "$git_name"
 git config --global user.email "$git_email"
-
-# Ativa cores e editor padrão
 git config --global color.ui auto
 git config --global core.editor nano
-
-# Cache de credenciais por 1 hora
 git config --global credential.helper 'cache --timeout=3600'
-
-# Alias úteis
 git config --global alias.co checkout
 git config --global alias.br branch
 git config --global alias.cm commit

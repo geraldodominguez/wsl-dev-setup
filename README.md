@@ -1,6 +1,6 @@
 # 🚀 WSL Dev Setup
 
-[![Versão](https://img.shields.io/github/v/release/geraldodominguez/wsl-dev-setup?label=vers%C3%A3o&style=for-the-badge)](https://github.com/geraldodominguez/wsl-dev-setup/releases)
+[![Versão](https://img.shields.io/github/v/release/geraldodominguez/wsl-dev-setup?label=vers%C3%A3o%20v1.0.2&style=for-the-badge)](https://github.com/geraldodominguez/wsl-dev-setup/releases)
 [![Instalar via Curl](https://img.shields.io/badge/Instalar%20via-curl-brightgreen?style=for-the-badge&logo=gnu-bash)](https://raw.githubusercontent.com/geraldodominguez/wsl-dev-setup/main/setup-dev.sh)
 [![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
